@@ -1,5 +1,5 @@
 
-# Zephyr Project Tamplate
+# Zephyr Project Template
 
 ## Blinky
 
