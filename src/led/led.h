@@ -8,29 +8,27 @@ class led {
 
 public:
 
-    int led() {}
-    int ~led() {}
+    led(const gpio_dt_spec*l): _l(l) {}
+    ~led() {}
 
-    int init(gpio_dt_spec&l) {
-        if (!gpio_is_ready_dt(l)) {
-		    return 1;
-	    }
-        if (gpio_pin_configure_dt(l, GPIO_OUTPUT_ACTIVE) < 0) {
-		    return 2;
-	    }    
+    int init() {
+        if (!gpio_is_ready_dt(_l)) return 1;
+        if (gpio_pin_configure_dt(_l, GPIO_OUTPUT_ACTIVE) < 0) return 2;
         return 0;
     }
 
     int on() {
-        if (gpio_pin_set_dt(&led_green, 1)) {
+        if (gpio_pin_set_dt(_l, 1)) {
 		    return 1;
 	    } 
         return 0;
     }
 
 
-private:
 
+
+private:
+    const gpio_dt_spec*_l;
 
 };
 

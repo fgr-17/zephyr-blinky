@@ -10,10 +10,10 @@
 
 #include <ansi_colors.h>
 #include <led_dt_defines.h>
+#include <led.h>
 
 /* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS  500
-
 
 /*
  * A build error on this line means your board is unsupported.
@@ -25,7 +25,6 @@ static const struct gpio_dt_spec led_blue = GPIO_DT_SPEC_GET(LED2_NODE, gpios);
 static const struct gpio_dt_spec led_red = GPIO_DT_SPEC_GET(LED3_NODE, gpios);
 
 typedef enum {LED_GREEN, LED_BLUE, LED_RED} leds_t;
-
 
 int led_on_only (leds_t l) {
 	switch(l) {
@@ -80,11 +79,15 @@ int main(void)
 {
 	leds_t led_active = LED_GREEN;
 
+	led l_green(&led_green);
+
 	printk("Starting led demo\n");
 
-	if (!gpio_is_ready_dt(&led_green)) {
-		return 0;
-	}
+	// if (!gpio_is_ready_dt(&led_green)) {
+	// 	return 0;
+	// }
+
+	l_green.init();
 
 	if (!gpio_is_ready_dt(&led_blue)) {
 		return 0;
@@ -121,7 +124,8 @@ int main(void)
 		switch(led_active) {
 
 			case LED_GREEN: {
-					led_on_only(LED_GREEN);
+					// led_on_only(LED_GREEN);
+					l_green.on();
 					led_active = LED_BLUE;
 				}
 				break;
