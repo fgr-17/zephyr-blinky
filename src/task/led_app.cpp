@@ -44,8 +44,7 @@ int led_app::init() {
     }
 
     state = leds_t::LED_GREEN;
-	printk("Starting led demo\n");
-
+	print_info("Starting led demo\n");
 
 	// for (auto l:leds) {
 	// 	if(l.init()) {

@@ -1,5 +1,5 @@
 /**
- * @file print.cpp
+ * @file print.h
  * @author Federico Roux (federico.roux@tuta.com)
  * @brief 
  * @version 0.1
@@ -16,15 +16,9 @@
 #include <ansi_colors.h>
 #include <string>
 
-int print_error(std::string msg) {
-	printk(ANSI_COLOR_RED "ERROR: "  ANSI_COLOR_RESET "%s\n", msg.c_str());
-	return 0;
-}
+int print_error(std::string msg);
 
-int print_info(std::string msg) {
-	printk(ANSI_COLOR_GREEN "INFO: "  ANSI_COLOR_RESET "%s\n", msg.c_str());
-	return 0;
-}
+int print_info(std::string msg);
 
 
 #endif // __PRINT_H
