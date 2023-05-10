@@ -46,13 +46,6 @@ int led_app::init() {
     state = leds_t::LED_GREEN;
 	print_info("Starting led demo\n");
 
-	// for (auto l:leds) {
-	// 	if(l.init()) {
-	// 		print_error("Failed to initialize green led");
-	// 		assert(1);
-	// 	}
-	// }
-
 	print_info("All leds initialized correctly");
     return 0;
 }
