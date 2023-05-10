@@ -1,0 +1,23 @@
+/**
+ * @file ansi_colors.h
+ * @author fgr17 (federico.roux@tuta.io)
+ * @brief 
+ * @version 0.1
+ * @date 2023-05-10
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
+#ifndef __ANSI_COLORS_H
+#define __ANSI_COLORS_H
+
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
+#endif // __ANSI_COLORS_H
