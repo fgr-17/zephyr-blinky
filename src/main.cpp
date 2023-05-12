@@ -10,6 +10,7 @@
 #include <print.h>
 
 #include "version_git_hash.h"
+#include "version_git_branch.h"
 
 /* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS  500
@@ -21,7 +22,7 @@ int main(void)
 	led_app led_set1;
 
 	printk("============================================\n");
-	print_info("Version Git Hash:" BLINKY_GIT_HASH);
+	print_info("Git Info:" BLINKY_GIT_HASH "@" BLINKY_GIT_BRANCH);
 	printk("============================================\n");
 
 	led_set1.init();
