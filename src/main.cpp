@@ -22,6 +22,7 @@ int main(void)
 	led_app led_set1;
 
 	printk("============================================\n");
+    // printk("Board: %s\n", DT_ALIAS(board_model));
 	print_info("Git Info:" BLINKY_GIT_HASH "@" BLINKY_GIT_BRANCH);
 	printk("============================================\n");
 
