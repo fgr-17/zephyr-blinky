@@ -4,6 +4,5 @@
         l0 = &green_led_1;
         l1 = &blue_led_1;
         l2 = &red_led_1;
-        board_model = &model;
     };
 };
