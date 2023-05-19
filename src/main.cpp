@@ -22,6 +22,7 @@ int main(void)
 	led_app led_set1;
 
 	printk("============================================\n");
+    print_info("Board: " CONFIG_BOARD);
 	print_info("Git Info:" BLINKY_GIT_HASH "@" BLINKY_GIT_BRANCH);
 	printk("============================================\n");
 
