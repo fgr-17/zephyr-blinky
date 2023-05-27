@@ -6,7 +6,7 @@
 
 
 #include <zephyr/kernel.h>
-#include <led_app.h>
+#include <led_array.h>
 #include <print.h>
 
 #include <instances.h>
@@ -21,7 +21,7 @@
 
 int main(void) {
 
-	led_app led_array(led_green, led_blue, led_red);
+	led_array led_array(led_green, led_blue, led_red);
 
 	printk("============================================\n");
     print_info("Board: " CONFIG_BOARD);
@@ -31,7 +31,6 @@ int main(void) {
 	led_array.init();
 
 	while (1) {
-
 		led_array.fsm();
 		k_msleep(SLEEP_TIME_MS);
 	}

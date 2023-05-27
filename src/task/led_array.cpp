@@ -13,11 +13,11 @@
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 
-#include "led_app.h"
+#include "led_array.h"
 #include <led.h>
 #include <assert.h>
 
-int led_app::init() {
+int led_array::init() {
 
     print_info("Initializing led array");
 
@@ -40,7 +40,7 @@ int led_app::init() {
 }
 
 
-int led_app::fsm() {
+int led_array::fsm() {
 
     switch(state) {
 
