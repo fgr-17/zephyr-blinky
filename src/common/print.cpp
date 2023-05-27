@@ -10,6 +10,9 @@
  */
 #include "print.h"
 
+
+#define __DEBUG
+
 int print_error(std::string msg) {
 	printk(ANSI_COLOR_RED "ERROR: "  ANSI_COLOR_RESET "%s\n", msg.c_str());
 	return 0;
@@ -17,5 +20,12 @@ int print_error(std::string msg) {
 
 int print_info(std::string msg) {
 	printk(ANSI_COLOR_GREEN "INFO: "  ANSI_COLOR_RESET "%s\n", msg.c_str());
+	return 0;
+}
+
+int print_debug(std::string msg) {
+#ifdef __DEBUG
+	printk(ANSI_COLOR_YELLOW "DEBUG: "  ANSI_COLOR_RESET "%s\n", msg.c_str());
+#endif
 	return 0;
 }

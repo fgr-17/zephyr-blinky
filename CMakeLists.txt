@@ -20,8 +20,8 @@ set(SRC_FILES
     "${SRC_DIR}/task/led_app.cpp"
     "${SRC_DIR}/common/print.cpp"
     "${SRC_DIR}/bsp/instances.cpp"
+    "${SRC_DIR}/bsp/dt_instances.cpp"
 )
-
 
 target_include_directories(app PRIVATE ${INLCUDE_DIRS})
 target_sources(app PRIVATE ${SRC_FILES})

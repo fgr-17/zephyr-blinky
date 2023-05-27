@@ -18,24 +18,19 @@
 #include <assert.h>
 
 int led_app::init() {
-    /*
-    * A build error on this line means your board is unsupported.
-    * See the sample documentation for information on how to fix this.
-    */
 
-    // if(l_green.init(&led_green)) {
-    //     print_error("Failed to initialize green led");
-    //     assert(1);
-    // }
+    print_info("Initializing led array");
+
+    if(l_green.init()) {
+        print_error("Failed to initialize green led");
+    }
     
-    // if(l_blue.init(&led_blue)) {
-    //     print_error("Failed to initialize blue led");
-    //     assert(1);
-    // }
-    // if(l_red.init(&led_red)) {
-    //     print_error("Failed to initialize red led");
-    //     assert(1);
-    // }
+    if(l_blue.init()) {
+        print_error("Failed to initialize blue led");
+    }
+    if(l_red.init()) {
+        print_error("Failed to initialize red led");
+    }
 
     state = leds_t::LED_GREEN;
 	print_info("Starting led demo\n");

@@ -10,12 +10,10 @@
  */
 
 #include <print.h>
-#include <zephyr/kernel.h>
-#include <zephyr/drivers/gpio.h>
-
 
 #include <led.h>
+#include <dt_instances.h>
 
-led led_green{GPIO_DT_SPEC_GET(DT_ALIAS(l0), gpios)};
-led led_blue{GPIO_DT_SPEC_GET(DT_ALIAS(l1), gpios)};
-led led_red{GPIO_DT_SPEC_GET(DT_ALIAS(l2), gpios)};
+led led_green{&l0_struct};
+led led_blue{&l1_struct};
+led led_red{&l2_struct};

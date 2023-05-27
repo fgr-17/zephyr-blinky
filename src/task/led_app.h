@@ -19,7 +19,8 @@ class led_app {
 
 public:
 
-    led_app(){}
+    // led_app(){}
+    led_app(led&lg, led&lb, led&lr) : l_green(lg), l_blue(lb), l_red(lr) {}
     ~led_app(){}
     
     enum class leds_t {LED_GREEN, LED_BLUE, LED_RED};
@@ -29,9 +30,9 @@ public:
 
 private:
     leds_t state;
-    led l_green;
-	led l_blue;
-	led l_red;
+    led&l_green;
+	led&l_blue;
+	led&l_red;
 };
 
 #endif //__LED_APP_H

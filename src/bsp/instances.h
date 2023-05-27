@@ -12,6 +12,6 @@
 
 #include <led.h>
 
-led led_green;
-led led_blue;
-led led_red;
+extern led led_green;
+extern led led_blue;
+extern led led_red;
