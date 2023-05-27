@@ -1,14 +1,12 @@
 #!/bin/bash
 
-BOARD=nucleo_u575zi_q
-
 if [ $# -eq 0 ]; then
-  echo "No board received. Using $BOARD as default"
+  echo "No board received. Exiting..."
+  exit 1
 else
   BOARD=$1
-  echo "Board: Using $BOARD"
+  echo "Building firmware for board ${BOARD}"
 fi
-
 
 echo "Creating git version information files..."
 ./update_git_hash_on_file.sh
