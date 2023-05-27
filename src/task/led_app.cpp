@@ -13,12 +13,6 @@
 #include <zephyr/kernel.h>
 #include <zephyr/drivers/gpio.h>
 
-#include <led_dt_defines.h>
-
-static const struct gpio_dt_spec led_green = GPIO_DT_SPEC_GET(LED1_NODE, gpios);
-static const struct gpio_dt_spec led_blue = GPIO_DT_SPEC_GET(LED2_NODE, gpios);
-static const struct gpio_dt_spec led_red = GPIO_DT_SPEC_GET(LED3_NODE, gpios);
-
 #include "led_app.h"
 #include <led.h>
 #include <assert.h>
@@ -29,19 +23,19 @@ int led_app::init() {
     * See the sample documentation for information on how to fix this.
     */
 
-    if(l_green.init(&led_green)) {
-        print_error("Failed to initialize green led");
-        assert(1);
-    }
+    // if(l_green.init(&led_green)) {
+    //     print_error("Failed to initialize green led");
+    //     assert(1);
+    // }
     
-    if(l_blue.init(&led_blue)) {
-        print_error("Failed to initialize blue led");
-        assert(1);
-    }
-    if(l_red.init(&led_red)) {
-        print_error("Failed to initialize red led");
-        assert(1);
-    }
+    // if(l_blue.init(&led_blue)) {
+    //     print_error("Failed to initialize blue led");
+    //     assert(1);
+    // }
+    // if(l_red.init(&led_red)) {
+    //     print_error("Failed to initialize red led");
+    //     assert(1);
+    // }
 
     state = leds_t::LED_GREEN;
 	print_info("Starting led demo\n");

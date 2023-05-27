@@ -19,17 +19,17 @@
 int main(void)
 {
 
-	led_app led_set1;
+	led_app led_arrange;
 
 	printk("============================================\n");
     print_info("Board: " CONFIG_BOARD);
 	print_info("Git Info:" BLINKY_GIT_HASH "@" BLINKY_GIT_BRANCH);
 	printk("============================================\n");
 
-	led_set1.init();
+	led_arrange.init();
 	while (1) {
 
-		led_set1.fsm();
+		led_arrange.fsm();
 		k_msleep(SLEEP_TIME_MS);
 	}
 	return 0;

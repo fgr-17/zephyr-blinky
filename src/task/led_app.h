@@ -12,7 +12,6 @@
 #ifndef __LED_APP_H
 #define __LED_APP_H
 
-#include <led_dt_defines.h>
 #include <led.h>
 
 class led_app {
