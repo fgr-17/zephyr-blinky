@@ -11,7 +11,7 @@
 #include "print.h"
 
 
-#define __DEBUG
+// #define __DEBUG 0
 
 int print_error(std::string msg) {
 	printk(ANSI_COLOR_RED "ERROR: "  ANSI_COLOR_RESET "%s\n", msg.c_str());

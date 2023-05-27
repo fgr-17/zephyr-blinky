@@ -9,6 +9,8 @@
 #include <led_array.h>
 #include <print.h>
 
+#include <vector>
+
 #include <instances.h>
 
 
@@ -21,17 +23,17 @@
 
 int main(void) {
 
-	led_array led_array(led_green, led_blue, led_red);
+	led_array leds(led_array::led_vector {led_green, led_blue, led_red});
 
-	printk("============================================\n");
+	printk("==================================================\n");
     print_info("Board: " CONFIG_BOARD);
 	print_info("Git Info:" BLINKY_GIT_HASH "@" BLINKY_GIT_BRANCH);
-	printk("============================================\n");
+	printk("==================================================\n");
 
-	led_array.init();
+	leds.init();
 
 	while (1) {
-		led_array.fsm();
+		leds.fsm();
 		k_msleep(SLEEP_TIME_MS);
 	}
 	return 0;
