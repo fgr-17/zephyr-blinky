@@ -13,13 +13,10 @@
 
 #include <instances.h>
 
-
 #include "version_git_hash.h"
 #include "version_git_branch.h"
 
-/* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS  500
-
 
 int main(void) {
 

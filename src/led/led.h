@@ -21,7 +21,6 @@ public:
 
     led() {}
     led(const gpio_dt_spec*l): _l(l) {}
-    // led(const gpio_dt_spec l): _l(&l) {}
     ~led() {}
 
     int init() {

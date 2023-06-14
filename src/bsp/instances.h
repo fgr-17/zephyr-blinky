@@ -9,9 +9,13 @@
  * 
  */
 
+#ifndef __INSTANCES_H
+#define __INSTANCES_H
 
 #include <led.h>
 
 extern led led_green;
 extern led led_blue;
 extern led led_red;
+
+#endif // __INSTANCES_H

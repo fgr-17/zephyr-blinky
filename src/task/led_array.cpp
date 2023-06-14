@@ -20,18 +20,6 @@ int led_array::init() {
 
     print_info("Initializing led array");
 
-    // if(l_green.init()) {
-    //     print_error("Failed to initialize green led");
-    // }
-    
-    // if(l_blue.init()) {
-    //     print_error("Failed to initialize blue led");
-    // }
-    // if(l_red.init()) {
-    //     print_error("Failed to initialize red led");
-    // }
-
-
     for(auto l:_la) {
         if(l.init()) print_error("Failed to initialize led");
     }
@@ -58,36 +46,5 @@ int led_array::fsm() {
     if(++state >= _la.size())
         state = 0;
 
-    // switch(state) {
-
-    //     case leds_t::LED_GREEN: {
-    //             printk(ANSI_COLOR_GREEN "Green led" ANSI_COLOR_RESET "\n");
-    //             l_green.on();
-    //             l_blue.off();
-    //             l_red.off();
-    //             state = leds_t::LED_BLUE;
-    //         }
-    //         break;
-    //     case leds_t::LED_BLUE: {
-    //             printk(ANSI_COLOR_BLUE "Blue led" ANSI_COLOR_RESET "\n");
-    //             l_green.off();
-    //             l_blue.on();
-    //             l_red.off();               
-    //             state = leds_t::LED_RED;
-    //         }
-    //         break;
-    //     case leds_t::LED_RED: {
-    //             printk(ANSI_COLOR_RED "Red led" ANSI_COLOR_RESET "\n");
-    //             l_green.off();
-    //             l_blue.off();
-    //             l_red.on();
-    //             state = leds_t::LED_GREEN;
-    //             }
-    //         break;
-    //     default: {
-    //         state = leds_t::LED_GREEN;
-    //         return 1;
-    //     }
-    // }
     return 0;
 }
