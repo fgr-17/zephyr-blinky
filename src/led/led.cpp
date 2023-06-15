@@ -11,6 +11,12 @@
 
 #include <led.h>
 
+/**
+ * @brief initializa led driver
+ * 
+ * @return int 
+ */
+
 int led::init() {
     print_debug("led: init without param");
     if(!gpio_is_ready_dt(_l)) return 1;
@@ -19,11 +25,24 @@ int led::init() {
     return 0;
 }
 
+/**
+ * @brief initialize led driver from dt_spec
+ * 
+ * @param l 
+ * @return int 
+ */
+
 int led::init(const gpio_dt_spec*l) {
     print_info("led: init with param");
     _l = l;
     return init();
 }
+
+/**
+ * @brief turns led on and sets the state
+ * 
+ * @return int 
+ */
 
 int led::on() {
     if (gpio_pin_set_dt(_l, 1)) {
@@ -33,6 +52,12 @@ int led::on() {
     return 0;
 }
 
+/**
+ * @brief turns led off and sets the state
+ * 
+ * @return int 
+ */
+
 int led::off() {
     if (gpio_pin_set_dt(_l, 0)) {
         return 1;
@@ -40,6 +65,12 @@ int led::off() {
     _state = state_t::OFF;
     return 0;
 }
+
+/**
+ * @brief toggle led state
+ * 
+ * @return int 
+ */
 
 int led::toggle() {
     switch (_state) {
