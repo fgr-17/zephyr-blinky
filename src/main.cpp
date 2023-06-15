@@ -30,7 +30,6 @@ int main(void) {
 	leds.init();
 
 	while (1) {
-		leds.fsm();
 		k_msleep(SLEEP_TIME_MS);
 	}
 	return 0;

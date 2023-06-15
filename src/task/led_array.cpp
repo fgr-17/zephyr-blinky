@@ -38,6 +38,8 @@ void blink(void*void_led, void* void_delay, void* void_period) {
     return;
 }
 
+int d = 0;
+int p = 0;
 
 int led_array::init() {
 
@@ -45,29 +47,13 @@ int led_array::init() {
 
     for(auto l:_la) {
         if(l.init()) print_error("Failed to initialize led");
+        k_thread_create(&my_thread_data, my_stack_area, STACKSIZE,
+                        blink, static_cast<void*>(&l), static_cast<void*>(&d), static_cast<void*>(&p),
+                        PRIORITY, 0, K_NO_WAIT);
+        k_thread_name_set(&my_thread_data, "blink 0");
     }
 
-    state = 0;
 	print_info("All leds initialized correctly");
-    return 0;
-}
-
-
-int led_array::fsm() {
-
-    uint8_t c = 0;
-    for(auto&l:_la) {
-        if(state == c) {
-            l.on();
-        }
-        else {
-            l.off();
-        }
-        c++;
-    }
-
-    if(++state >= _la.size())
-        state = 0;
 
     return 0;
 }

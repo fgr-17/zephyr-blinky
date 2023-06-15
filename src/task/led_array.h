@@ -28,7 +28,6 @@ public:
     int fsm();
 
 private:
-    uint8_t state;
     led_vector _la;
 };
 
