@@ -17,10 +17,7 @@
 #include <string>
 
 int print_error(std::string msg);
-
 int print_info(std::string msg);
-
 int print_debug(std::string msg);
-
 
 #endif // __PRINT_H

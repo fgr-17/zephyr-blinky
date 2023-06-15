@@ -23,13 +23,17 @@ public:
     led(const gpio_dt_spec*l): _l(l) {}
     ~led() {}
 
+    enum class state_t {ON, OFF};
+
     int init();
     int init(const gpio_dt_spec*l);
     int on();
     int off();
+    int toggle();
 
 private:
     const gpio_dt_spec*_l;
+    state_t _state;
 
 };
 

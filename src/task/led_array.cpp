@@ -16,6 +16,29 @@
 #include "led_array.h"
 #include <led.h>
 
+#define STACKSIZE 1024
+#define PRIORITY 7
+
+K_THREAD_STACK_DEFINE(my_stack_area, STACKSIZE);
+struct k_thread my_thread_data;
+
+
+void blink(void*void_led, void* void_delay, void* void_period) {
+
+    auto l = static_cast<led*> (void_led);
+    auto delay_ms = static_cast<int*> (void_delay);
+    auto period_ms = static_cast<int*> (void_period);
+
+    k_msleep(*delay_ms);
+
+    while(1) {
+        l->toggle();
+        k_msleep(*period_ms);
+    }
+    return;
+}
+
+
 int led_array::init() {
 
     print_info("Initializing led array");
