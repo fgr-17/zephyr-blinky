@@ -20,7 +20,9 @@
 
 int main(void) {
 
-	led_array leds(led_array::led_vector {led_green, led_blue, led_red});
+	led_array leds(led_array::led_vector {led_blink{led_green, static_cast<uint16_t>(0), 1000}, 
+										  led_blink{led_blue, 300, 1000},
+										  led_blink{led_red, 600, 1000}});
 
 	printk("==================================================\n");
     print_info("Board: " CONFIG_BOARD);
