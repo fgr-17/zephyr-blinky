@@ -16,78 +16,69 @@
 #include "led_array.h"
 #include <led.h>
 
-int led_array::init() {
-
-    print_info("Initializing led array");
-
-    // if(l_green.init()) {
-    //     print_error("Failed to initialize green led");
-    // }
-    
-    // if(l_blue.init()) {
-    //     print_error("Failed to initialize blue led");
-    // }
-    // if(l_red.init()) {
-    //     print_error("Failed to initialize red led");
-    // }
+#include <typeinfo>
 
 
-    for(auto l:_la) {
-        if(l.init()) print_error("Failed to initialize led");
+/** @brief number of threads */
+#define THREADS_N       (3)
+/** stack size for each thread */
+#define STACKSIZE       (1024)
+/** threads priority */
+#define PRIORITY        (7)
+
+/** array of stack slices for each thread */
+K_THREAD_STACK_ARRAY_DEFINE(my_stack_area, THREADS_N, STACKSIZE);
+struct k_thread my_thread_data[THREADS_N];
+
+/** 
+ * @function blink
+ * 
+ * @param void_led led class with led driver inherited + delay and period
+*/
+void blink(void*void_led, void*, void*) {
+
+    auto l = static_cast<led_blink*> (void_led);
+
+    print_info("Thread started");
+    printk("Initial delay: %d\n", l->_delay);
+    printk("Period: %d\n", l->_period);
+    k_msleep(l->_delay);
+
+    while(1) {
+        k_msleep(l->_period);
+        l->toggle();
     }
-
-    state = 0;
-	print_info("All leds initialized correctly");
-    return 0;
+    return;
 }
 
+/**
+ * @brief init
+ * 
+ * @return initialize led and starts all threads
+ */
 
-int led_array::fsm() {
+int led_array::init() {
 
-    uint8_t c = 0;
+    uint8_t i = 0;
+    print_info("Initializing led array");
+
     for(auto&l:_la) {
-        if(state == c) {
-            l.on();
+        if(l.init()) print_error("Failed to initialize led");
+        k_tid_t tid = k_thread_create(&my_thread_data[i], my_stack_area[i], STACKSIZE,
+                        blink, static_cast<void*>(&l), NULL, NULL,
+                        PRIORITY, 0, K_NO_WAIT);
+
+        printk("l pointer %p\n", &l);
+        
+        if(tid == NULL) {
+            print_error("Failed to create thread");
         }
-        else {
-            l.off();
-        }
-        c++;
+        
+        k_thread_name_set(&my_thread_data[i], "blink");
+        i++;
     }
 
-    if(++state >= _la.size())
-        state = 0;
+	print_info("All leds initialized correctly");
 
-    // switch(state) {
-
-    //     case leds_t::LED_GREEN: {
-    //             printk(ANSI_COLOR_GREEN "Green led" ANSI_COLOR_RESET "\n");
-    //             l_green.on();
-    //             l_blue.off();
-    //             l_red.off();
-    //             state = leds_t::LED_BLUE;
-    //         }
-    //         break;
-    //     case leds_t::LED_BLUE: {
-    //             printk(ANSI_COLOR_BLUE "Blue led" ANSI_COLOR_RESET "\n");
-    //             l_green.off();
-    //             l_blue.on();
-    //             l_red.off();               
-    //             state = leds_t::LED_RED;
-    //         }
-    //         break;
-    //     case leds_t::LED_RED: {
-    //             printk(ANSI_COLOR_RED "Red led" ANSI_COLOR_RESET "\n");
-    //             l_green.off();
-    //             l_blue.off();
-    //             l_red.on();
-    //             state = leds_t::LED_GREEN;
-    //             }
-    //         break;
-    //     default: {
-    //         state = leds_t::LED_GREEN;
-    //         return 1;
-    //     }
-    // }
     return 0;
 }

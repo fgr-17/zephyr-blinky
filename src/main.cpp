@@ -13,17 +13,16 @@
 
 #include <instances.h>
 
-
 #include "version_git_hash.h"
 #include "version_git_branch.h"
 
-/* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS  500
-
 
 int main(void) {
 
-	led_array leds(led_array::led_vector {led_green, led_blue, led_red});
+	led_array leds(led_array::led_vector {{led_green, 0, 1000}, 
+										  {led_blue, 300, 1000},
+										  {led_red, 600, 1000}});
 
 	printk("==================================================\n");
     print_info("Board: " CONFIG_BOARD);
@@ -33,7 +32,6 @@ int main(void) {
 	leds.init();
 
 	while (1) {
-		leds.fsm();
 		k_msleep(SLEEP_TIME_MS);
 	}
 	return 0;

@@ -21,41 +21,21 @@ public:
 
     led() {}
     led(const gpio_dt_spec*l): _l(l) {}
-    // led(const gpio_dt_spec l): _l(&l) {}
     ~led() {}
 
-    int init() {
-        print_debug("led: init without param");
-        if (!gpio_is_ready_dt(_l)) return 1;
-        if (gpio_pin_configure_dt(_l, GPIO_OUTPUT_ACTIVE) < 0) return 2;
-        return 0;
-    }
+    enum class state_t {ON, OFF};
 
-    int init(const gpio_dt_spec*l) {
-        print_info("led: init with param");
-        _l = l;
-        if (!gpio_is_ready_dt(_l)) return 1;
-        if (gpio_pin_configure_dt(_l, GPIO_OUTPUT_ACTIVE) < 0) return 2;
-        return 0;
-    }
+    int init();
+    int init(const gpio_dt_spec*l);
+    int on();
+    int off();
+    int toggle();
 
-    int on() {
-        if (gpio_pin_set_dt(_l, 1)) {
-		    return 1;
-	    } 
-        return 0;
-    }
-
-    int off() {
-        if (gpio_pin_set_dt(_l, 0)) {
-		    return 1;
-	    } 
-        return 0;
-    }
-
+    const gpio_dt_spec* get_dt_spec() const;
 
 private:
     const gpio_dt_spec*_l;
+    state_t _state;
 
 };
 

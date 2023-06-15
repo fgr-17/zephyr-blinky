@@ -17,6 +17,7 @@ set(INLCUDE_DIRS
 
 set(SRC_FILES
     "${SRC_DIR}/main.cpp"
+    "${SRC_DIR}/led/led.cpp"
     "${SRC_DIR}/task/led_array.cpp"
     "${SRC_DIR}/common/print.cpp"
     "${SRC_DIR}/bsp/instances.cpp"
