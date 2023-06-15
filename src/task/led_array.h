@@ -25,7 +25,6 @@ public:
     ~led_array(){}
     
     int init();
-    int fsm();
 
 private:
     led_vector _la;

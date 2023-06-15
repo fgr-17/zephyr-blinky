@@ -31,6 +31,8 @@ public:
     int off();
     int toggle();
 
+    const gpio_dt_spec* get_dt_spec() const;
+
 private:
     const gpio_dt_spec*_l;
     state_t _state;

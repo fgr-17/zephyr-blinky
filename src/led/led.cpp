@@ -54,3 +54,7 @@ int led::toggle() {
         return 1;
     }
 }
+
+const gpio_dt_spec* led::get_dt_spec() const {
+    return _l;
+}
