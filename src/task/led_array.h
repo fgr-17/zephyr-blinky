@@ -18,10 +18,11 @@
 
 class led_blink: public led {
 public:
-    led_blink(led l, uint16_t delay, uint16_t period): led(std::move(l)), _delay(delay), _period(period) {}
+    led_blink(led l, uint16_t delay, uint16_t period, std::string name): led(std::move(l)), _delay(delay), _period(period), _name(name) {}
 
     uint16_t _delay;
     uint16_t _period;
+    std::string _name;
 };
 
 class led_array {

@@ -20,10 +20,10 @@
 
 int main(void) {
 
-	led_array leds(led_array::led_vector {{led0, 0, 1000}, 
-										  {led1, 300, 1000},
-										  {led2, 600, 1000},
-										  {led3, 900, 1000}});
+	led_array leds(led_array::led_vector {{led0, 0, 1000, "led 0"}, 
+										  {led1, 300, 1000, "led 1"},
+										  {led2, 600, 1000, "led 2"},
+										  {led3, 900, 1000, "led 3"}});
 
 	printk("==================================================\n");
     print_info("Board: " CONFIG_BOARD);

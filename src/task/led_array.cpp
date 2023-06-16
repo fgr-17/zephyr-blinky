@@ -62,29 +62,35 @@ int led_array::init() {
     uint8_t i = 0;
     print_info("Initializing led array");
 
+
+
     for(auto&l:_la) {
 
         if(l.is_led_ready()) {
 
-            if(l.init()) print_error("Failed to initialize led");
-            k_tid_t tid = k_thread_create(&my_thread_data[i], my_stack_area[i], STACKSIZE,
-                            blink, static_cast<void*>(&l), NULL, NULL,
-                            PRIORITY, 0, K_NO_WAIT);
+            if(l.init()) 
+                print_error("Failed to initialize %s", l._name.c_str());
+            else {
+                k_tid_t tid = k_thread_create(&my_thread_data[i], my_stack_area[i], STACKSIZE,
+                                blink, static_cast<void*>(&l), NULL, NULL,
+                                PRIORITY, 0, K_NO_WAIT);
 
-            if(tid == NULL) {
-                print_error("Failed to create thread");
+                if(tid == NULL) {
+                    print_error("Failed to create thread for %s", l._name.c_str());
+                }
+                else{                 
+                    k_thread_name_set(&my_thread_data[i], "blink");
+                }
             }
-            
-            k_thread_name_set(&my_thread_data[i], "blink");
             i++;
         }
         else {
-            print_error("Led is not ready for the current board");
+            print_error("%s is not available for the current board", l._name.c_str());
         }
 
     }
 
-	print_info("All leds initialized correctly");
+	print_info("Leds initialization completed");
 
     return 0;
 }
