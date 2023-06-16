@@ -20,7 +20,7 @@
 
 
 /** @brief number of threads */
-#define THREADS_N       (3)
+#define THREADS_N       (4)
 /** stack size for each thread */
 #define STACKSIZE       (1024)
 /** threads priority */
@@ -63,19 +63,25 @@ int led_array::init() {
     print_info("Initializing led array");
 
     for(auto&l:_la) {
-        if(l.init()) print_error("Failed to initialize led");
-        k_tid_t tid = k_thread_create(&my_thread_data[i], my_stack_area[i], STACKSIZE,
-                        blink, static_cast<void*>(&l), NULL, NULL,
-                        PRIORITY, 0, K_NO_WAIT);
 
-        printk("l pointer %p\n", &l);
-        
-        if(tid == NULL) {
-            print_error("Failed to create thread");
+        if(l.is_led_ready()) {
+
+            if(l.init()) print_error("Failed to initialize led");
+            k_tid_t tid = k_thread_create(&my_thread_data[i], my_stack_area[i], STACKSIZE,
+                            blink, static_cast<void*>(&l), NULL, NULL,
+                            PRIORITY, 0, K_NO_WAIT);
+
+            if(tid == NULL) {
+                print_error("Failed to create thread");
+            }
+            
+            k_thread_name_set(&my_thread_data[i], "blink");
+            i++;
         }
-        
-        k_thread_name_set(&my_thread_data[i], "blink");
-        i++;
+        else {
+            print_error("Led is not ready for the current board");
+        }
+
     }
 
 	print_info("All leds initialized correctly");

@@ -31,7 +31,7 @@ public:
     int off();
     int toggle();
 
-    const gpio_dt_spec* get_dt_spec() const;
+    bool is_led_ready() const;
 
 private:
     const gpio_dt_spec*_l;

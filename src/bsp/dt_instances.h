@@ -15,5 +15,7 @@
 extern struct gpio_dt_spec l0_struct;
 extern struct gpio_dt_spec l1_struct;
 extern struct gpio_dt_spec l2_struct;
+extern struct gpio_dt_spec l3_struct;
+
 
 #endif // __DT_INSTANCES_H
