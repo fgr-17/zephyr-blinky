@@ -86,6 +86,8 @@ int led::toggle() {
     }
 }
 
-const gpio_dt_spec* led::get_dt_spec() const {
-    return _l;
+bool led::is_led_ready() const {
+    if(!device_is_ready(_l->port))
+        return false;
+    return true;
 }
