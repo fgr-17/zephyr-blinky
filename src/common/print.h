@@ -16,8 +16,8 @@
 #include <ansi_colors.h>
 #include <string>
 
-int print_error(std::string msg);
-int print_info(std::string msg);
-int print_debug(std::string msg);
+int print_error(const char *format, ...);
+int print_info(const char *format, ...);
+int print_debug(const char *format, ...);
 
 #endif // __PRINT_H
