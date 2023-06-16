@@ -14,12 +14,19 @@
 
 #include <stdint.h>
 #include <vector>
+#include <string>
 #include <led.h>
 
 class led_blink: public led {
 public:
     led_blink(led l, uint16_t delay, uint16_t period, std::string name): led(std::move(l)), _delay(delay), _period(period), _name(name) {}
 
+    uint16_t get_delay() { return _delay;}
+    uint16_t get_period() { return _period;}
+    const char* get_name_c_str() { return _name.c_str();}
+
+
+private:
     uint16_t _delay;
     uint16_t _period;
     std::string _name;
