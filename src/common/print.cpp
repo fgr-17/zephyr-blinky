@@ -8,24 +8,41 @@
  * @copyright Copyright (c) 2023
  * 
  */
-
+#include <stdarg.h>
 #include "print.h"
+
 
 // #define __DEBUG 0
 
-int print_error(std::string msg) {
-	printk(ANSI_COLOR_RED "ERROR: "  ANSI_COLOR_RESET "%s\n", msg.c_str());
+int print_error(const char *format, ...) {
+	va_list args;
+    va_start(args, format);
+	printf(ANSI_COLOR_RED "ERROR: "  ANSI_COLOR_RESET );
+	vprintf(format, args);
+	printf("\n");
+	va_end(args);
 	return 0;
 }
 
-int print_info(std::string msg) {
-	printk(ANSI_COLOR_GREEN "INFO: "  ANSI_COLOR_RESET "%s\n", msg.c_str());
+int print_info(const char *format, ...) {
+
+	va_list args;
+    va_start(args, format);
+	printf(ANSI_COLOR_GREEN "INFO: "  ANSI_COLOR_RESET );
+	vprintf(format, args);
+	printf("\n");
+	va_end(args);
 	return 0;
 }
 
-int print_debug(std::string msg) {
+int print_debug(const char *format, ...) {
 #ifdef __DEBUG
-	printk(ANSI_COLOR_YELLOW "DEBUG: "  ANSI_COLOR_RESET "%s\n", msg.c_str());
+	va_list args;
+    va_start(args, format);
+	printf(ANSI_COLOR_YELLOW "DEBUG: "  ANSI_COLOR_RESET );
+	vprintf(format, args);
+	printf("\n");
+	va_end(args);
 #endif
 	return 0;
 }
