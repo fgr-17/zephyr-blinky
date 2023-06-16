@@ -14,8 +14,9 @@
 
 #include <led.h>
 
-extern led led_green;
-extern led led_blue;
-extern led led_red;
+extern led led0;
+extern led led1;
+extern led led2;
+extern led led3;
 
 #endif // __INSTANCES_H

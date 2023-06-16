@@ -14,6 +14,7 @@
 #include <led.h>
 #include <dt_instances.h>
 
-led led_green{&l0_struct};
-led led_blue{&l1_struct};
-led led_red{&l2_struct};
+led led0{&l0_struct};
+led led1{&l1_struct};
+led led2{&l2_struct};
+led led3{&l3_struct};

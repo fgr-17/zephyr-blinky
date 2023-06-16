@@ -20,7 +20,7 @@
 
 
 /** @brief number of threads */
-#define THREADS_N       (3)
+#define THREADS_N       (4)
 /** stack size for each thread */
 #define STACKSIZE       (1024)
 /** threads priority */
@@ -71,8 +71,6 @@ int led_array::init() {
                             blink, static_cast<void*>(&l), NULL, NULL,
                             PRIORITY, 0, K_NO_WAIT);
 
-            printk("l pointer %p\n", &l);
-            
             if(tid == NULL) {
                 print_error("Failed to create thread");
             }
