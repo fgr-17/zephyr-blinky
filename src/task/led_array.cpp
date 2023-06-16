@@ -39,14 +39,14 @@ void blink(void*void_led, void*, void*) {
 
     auto l = static_cast<led_blink*> (void_led);
 
-    print_info("Thread started");
-    printk("Initial delay: %d\n", l->_delay);
-    printk("Period: %d\n", l->_period);
-    k_msleep(l->_delay);
+    print_info("== Thread started for %s ==", l->get_name_c_str());
+    print_info("Initial delay: %d", l->get_delay());
+    print_info("Period: %d", l->get_period());
+    k_msleep(l->get_delay());
 
     while(1) {
-        k_msleep(l->_period);
         l->toggle();
+        k_msleep(l->get_period());
     }
     return;
 }
@@ -62,21 +62,18 @@ int led_array::init() {
     uint8_t i = 0;
     print_info("Initializing led array");
 
-
-
     for(auto&l:_la) {
-
         if(l.is_led_ready()) {
 
             if(l.init()) 
-                print_error("Failed to initialize %s", l._name.c_str());
+                print_error("Failed to initialize %s", l.get_name_c_str());
             else {
                 k_tid_t tid = k_thread_create(&my_thread_data[i], my_stack_area[i], STACKSIZE,
                                 blink, static_cast<void*>(&l), NULL, NULL,
                                 PRIORITY, 0, K_NO_WAIT);
 
                 if(tid == NULL) {
-                    print_error("Failed to create thread for %s", l._name.c_str());
+                    print_error("Failed to create thread for %s", l.get_name_c_str());
                 }
                 else{                 
                     k_thread_name_set(&my_thread_data[i], "blink");
@@ -85,7 +82,7 @@ int led_array::init() {
             i++;
         }
         else {
-            print_error("%s is not available for the current board", l._name.c_str());
+            print_error("%s is not available for the current board", l.get_name_c_str());
         }
 
     }
